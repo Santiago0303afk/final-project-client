@@ -28,6 +28,8 @@ const App = () => {
         <Route exact path="/student/:id" component={StudentContainer} />
         //SC CREATED THIS
         <Route exact path="/newcampus" component={NewCampusContainer} />
+        //SC CREATED THIS 
+        <Route exact path="/editcampus/:id" component={EditCampusContainer} />
 
       </Switch>        
     </div>
