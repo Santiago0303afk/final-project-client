@@ -1,3 +1,4 @@
+//SC CREATED 
 import { useState } from 'react';
 
 const NewCampusView = ({ handleSubmit }) => {
