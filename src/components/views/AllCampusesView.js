@@ -1,46 +1,62 @@
 /*==================================================
-AllCampusesView.js
+/src/components/views/AllCampusesView.js
 
-The Views component is responsible for rendering web page with data provided by the corresponding Container component.
-It constructs a React component to display all campuses.
-================================================== */
+This View component is responsible for rendering the web page with data 
+provided by the corresponding Container component.
+It displays all campuses, each with a link to its detail page and a delete button.
+==================================================*/
+
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const AllCampusesView = (props) => {
-  // If there is no campus, display a message.
-  if (!props.allCampuses.length) {
-    return <div>There are no campuses.</div>;
+  const { allCampuses, handleDelete } = props;
+
+  // If there are no campuses, display a message.
+  if (!allCampuses.length) {
+    return (
+      <div>
+        <h1>All Campuses</h1>
+        <p>There are no campuses.</p>
+        <Link to="/newcampus">
+          <button>Add New Campus</button>
+        </Link>
+      </div>
+    );
   }
 
-  // If there is at least one campus, render All Campuses view 
+  // If there is at least one campus, render the list.
   return (
     <div>
       <h1>All Campuses</h1>
 
-      {props.allCampuses.map((campus) => (
-        <div key={campus.id}>
+      {allCampuses.map((campus) => (
+        <div key={campus.id} style={{ marginBottom: '20px' }}>
           <Link to={`/campus/${campus.id}`}>
             <h2>{campus.name}</h2>
           </Link>
-          <h4>campus id: {campus.id}</h4>
-          <p>{campus.address}</p>
-          <p>{campus.description}</p>
-          <hr/>
+          <h4>Campus ID: {campus.id}</h4>
+          <p>Address: {campus.address}</p>
+          <p>Description: {campus.description}</p>
+
+          <button onClick={() => handleDelete(campus.id)}>Delete</button>
+          <hr />
         </div>
       ))}
-      <br/>
-      <Link to={`/`}>
+
+      <br />
+      <Link to="/newcampus">
         <button>Add New Campus</button>
       </Link>
-      <br/><br/>
+      <br /><br />
     </div>
   );
 };
 
-// Validate data type of the props passed to component.
+// Validate data type of the props passed to the component.
 AllCampusesView.propTypes = {
   allCampuses: PropTypes.array.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 
 export default AllCampusesView;
