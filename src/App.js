@@ -26,6 +26,9 @@ const App = () => {
         <Route exact path="/students" component={AllStudentsContainer} />
         <Route exact path="/newstudent" component={NewStudentContainer} />
         <Route exact path="/student/:id" component={StudentContainer} />
+        //SC CREATED THIS
+        <Route exact path="/newcampus" component={NewCampusContainer} />
+
       </Switch>        
     </div>
   );
