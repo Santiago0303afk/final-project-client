@@ -139,3 +139,14 @@ export const deleteCampus = (campusId) => {
   };
 };
 
+//SC ADDED: 
+export const editCampusThunk = (campus) => async (dispatch) => {
+  try {
+    const res = await axios.put(`/api/campuses/${campus.id}`, campus);
+    dispatch(ac.editCampus(res.data));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+
