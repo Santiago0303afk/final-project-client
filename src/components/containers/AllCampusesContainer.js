@@ -6,6 +6,8 @@ passes data (if any) as props to the corresponding View component.
 If needed, it also defines the component's "connect" function.
 ================================================== */
 import Header from './Header';
+//SC ADDED:
+import { deleteCampusThunk } from "../../store/thunks";
 import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -45,6 +47,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
+    //SC ADDED:
+    handleDelete: (id) => dispatch(deleteCampusThunk(id)),
   };
 };
 
