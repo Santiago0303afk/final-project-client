@@ -100,3 +100,42 @@ export const fetchStudentThunk = id => async dispatch => {  // The THUNK
     console.error(err);
   }
 };
+//SC ADDED:
+export const addCampusThunk = (campus) => async (dispatch) => {
+  try {
+    const res = await axios.post('/api/campuses', campus);
+    dispatch(ac.addCampus(res.data));
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+//SC ADDED:
+export const deleteCampusThunk = (campusId) => async (dispatch) => {
+  try {
+    await axios.delete(`/api/campuses/${campusId}`);
+    dispatch(ac.deleteCampus(campusId));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+//SC ADDED:
+
+export const addCampus = (campus) => {
+  return {
+    type: at.ADD_CAMPUS,
+    payload: campus,
+  };
+};
+
+//SC ADDED:
+
+export const deleteCampus = (campusId) => {
+  return {
+    type: at.DELETE_CAMPUS,
+    payload: campusId,
+  };
+};
+
