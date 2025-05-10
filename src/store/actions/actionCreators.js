@@ -58,3 +58,9 @@ export const fetchStudent = (student) => {
     payload: student,
   };
 };
+
+//SC CREATED THIS: 
+export const editCampus = (campus) => ({
+  type: at.EDIT_CAMPUS,
+  payload: campus,
+});
