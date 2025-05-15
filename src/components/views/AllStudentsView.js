@@ -6,46 +6,51 @@ It constructs a React component to display the all students view page.
 ================================================== */
 import { Link } from "react-router-dom";
 
-const AllStudentsView = (props) => {
-  const {students, deleteStudent} = props;
-  // If there is no student, display a message
-  if (!students.length) {
+const AllStudentsView = ({ students, deleteStudent }) => {
+  if (!students || students.length === 0) {
     return (
-    <div>
-      <p>There are no students.</p>
-      <Link to={`newstudent`}>
-        <button>Add New Student</button>
-      </Link>
-    </div>
+      <div>
+        <h2>There are no students.</h2>
+        <Link to="/newstudent">
+          <button>Add New Student</button>
+        </Link>
+      </div>
     );
   }
-  
-  // If there is at least one student, render All Students view 
+
+  const handleDelete = (id, name) => {
+    const confirm = window.confirm(`Are you sure you want to delete ${name}?`);
+    if (confirm) {
+      deleteStudent(id);
+    }
+  };
+
   return (
     <div>
       <h1>All Students</h1>
 
       {students.map((student) => {
-          let name = student.firstname + " " + student.lastname;
-          return (
-            <div key={student.id}>
-              <Link to={`/student/${student.id}`}>
-                <h2>{name}</h2>
-              </Link>
-              <button onClick={() => deleteStudent(student.id)}>Delete</button>
-              <hr/>
-            </div>
-          );
-        }
-      )}
-      <br/>
-      <Link to={`/newstudent`}>
+        const fullName = `${student.firstname || ""} ${student.lastname || ""}`.trim();
+
+        return (
+          <div key={student.id} style={{ marginBottom: "20px" }}>
+            <Link to={`/student/${student.id}`}>
+              <h2>{fullName || "Unnamed Student"}</h2>
+            </Link>
+            <button onClick={() => handleDelete(student.id, fullName || "this student")}>
+              Delete
+            </button>
+            <hr />
+          </div>
+        );
+      })}
+
+      <br />
+      <Link to="/newstudent">
         <button>Add New Student</button>
       </Link>
-      <br/><br/>
     </div>
   );
 };
-
 
 export default AllStudentsView;
