@@ -34,6 +34,11 @@ class NewStudentContainer extends Component {
   handleSubmit = async event => {
     event.preventDefault();
 
+    if (!this.state.firstname.trim() || !this.state.lastname.trim()) {
+      alert("First name and last name are required.");
+      return;
+    }
+
     const student = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
