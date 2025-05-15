@@ -8,7 +8,8 @@ class NewCampusContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirect: false
+      redirect: false,
+      redirectId: null,
     };
   }
 
@@ -34,7 +35,7 @@ class NewCampusContainer extends Component {
     try {
       const createdCampus = await this.props.addCampus(newCampus);
       if (createdCampus && createdCampus.id) {
-        this.setState({ redirect: true });
+        this.setState({ redirect: true, redirectId: createdCampus.id });
       } else {
         alert("Campus creation failed. Please try again.");
       }
@@ -46,7 +47,7 @@ class NewCampusContainer extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/campuses" />;
+      return <Redirect to={`/campus/${this.state.redirectId}`} />;
     }
 
     return <NewCampusView handleSubmit={this.handleSubmit} />;
