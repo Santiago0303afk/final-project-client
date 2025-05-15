@@ -1,10 +1,3 @@
-/*==================================================
-StudentContainer.js
-
-The Container component is responsible for stateful logic and data fetching, and
-passes data (if any) as props to the corresponding View component.
-If needed, it also defines the component's "connect" function.
-================================================== */
 import Header from './Header';
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -12,39 +5,55 @@ import { fetchStudentThunk } from "../../store/thunks";
 import { StudentView } from "../views";
 
 class StudentContainer extends Component {
-  // Get student data from back-end database
   componentDidMount() {
-    //getting student ID from url
-    this.props.fetchStudent(this.props.match.params.id);
+    const studentId = this.props.match?.params?.id;
+    if (studentId) {
+      this.props.fetchStudent(studentId);
+    } else {
+      console.error("No student ID found in route params.");
+    }
   }
 
-  // Render Student view by passing student data as props to the corresponding View component
   render() {
+    const { student } = this.props;
+
+    if (!student) {
+      return (
+        <div>
+          <Header />
+          <h2>Loading student...</h2>
+        </div>
+      );
+    }
+
+    if (!student.id) {
+      return (
+        <div>
+          <Header />
+          <h2>Student not found.</h2>
+        </div>
+      );
+    }
+
     return (
       <div>
         <Header />
-        <StudentView student={this.props.student} />
+        <StudentView student={student} />
       </div>
     );
   }
 }
 
-// The following 2 input arguments are passed to the "connect" function used by "StudentContainer" to connect to Redux Store.  
-// The following 2 input arguments are passed to the "connect" function used by "AllCampusesContainer" component to connect to Redux Store.
 const mapState = (state) => {
   return {
-    student: state.student,  // Get the State object from Reducer "student"
+    student: state.student,
   };
 };
-// 2. The "mapDispatch" argument is used to dispatch Action (Redux Thunk) to Redux Store.
-// The "mapDispatch" calls the specific Thunk to dispatch its action. The "dispatch" is a function of Redux Store.
+
 const mapDispatch = (dispatch) => {
   return {
     fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
   };
 };
 
-// Export store-connected container by default
-// StudentContainer uses "connect" function to connect to Redux Store and to read values from the Store 
-// (and re-read the values when the Store State updates).
 export default connect(mapState, mapDispatch)(StudentContainer);
