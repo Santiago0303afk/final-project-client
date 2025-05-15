@@ -37,7 +37,7 @@ class NewStudentContainer extends Component {
     const student = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
-      campusId: this.state.campusId
+      campusId: this.state.campusId ? Number(this.state.campusId) : null
     };
 
     try {
