@@ -43,7 +43,6 @@ class NewStudentContainer extends Component {
     try {
       const newStudent = await this.props.addStudent(student);
 
-      // Defensive check in case the thunk doesn't return expected data
       if (!newStudent || !newStudent.id) {
         console.error("Student creation failed or no ID returned:", newStudent);
         alert("Failed to create student. Please check your input or try again.");
