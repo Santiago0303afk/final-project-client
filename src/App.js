@@ -17,6 +17,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePageContainer />} />
         <Route path="/campuses" element={<AllCampusesContainer />} />
+        <Route exact path="/add-campus" component={AddCampusContainer} />
         <Route path="/campus/:id" element={<CampusContainer />} />
         <Route path="/students" element={<AllStudentsContainer />} />
         <Route path="/newstudent" element={<NewStudentContainer />} />
