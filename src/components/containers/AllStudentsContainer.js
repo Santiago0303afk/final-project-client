@@ -24,17 +24,27 @@ class AllStudentsContainer extends Component {
   }
 
   // Render All Students view by passing all students data as props to the corresponding View component
-  render(){
-    return(
+render() {
+  const { allStudents } = this.props;
+
+  if (!allStudents) {
+    return (
       <div>
         <Header />
-        <AllStudentsView 
-          students={this.props.allStudents}
-          deleteStudent={this.props.deleteStudent}   
-        />
+        <h2>Loading students...</h2>
       </div>
-    )
+    );
   }
+
+  return (
+    <div>
+      <Header />
+      <AllStudentsView 
+        students={allStudents}
+        deleteStudent={this.props.deleteStudent}   
+      />
+    </div>
+  );
 }
 
 // The following 2 input arguments are passed to the "connect" function used by "AllStudentsContainer" component to connect to Redux Store.
