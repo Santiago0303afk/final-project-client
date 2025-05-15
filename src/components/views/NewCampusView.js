@@ -1,4 +1,3 @@
-//SC CREATED 
 import { useState } from 'react';
 
 const NewCampusView = ({ handleSubmit }) => {
@@ -13,8 +12,8 @@ const NewCampusView = ({ handleSubmit }) => {
 
   const validate = () => {
     const err = {};
-    if (!formData.name) err.name = 'Name is required';
-    if (!formData.address) err.address = 'Address is required';
+    if (!formData.name.trim()) err.name = 'Name is required';
+    if (!formData.address.trim()) err.address = 'Address is required';
     return err;
   };
 
@@ -24,8 +23,20 @@ const NewCampusView = ({ handleSubmit }) => {
     if (Object.keys(err).length > 0) {
       setErrors(err);
     } else {
-      handleSubmit(formData);
+      // Clear optional fields to fallback values if needed
+      const cleanedData = {
+        name: formData.name.trim(),
+        address: formData.address.trim(),
+        description: formData.description.trim(),
+        imageUrl: formData.imageUrl.trim()
+      };
+      handleSubmit(cleanedData);
     }
+  };
+
+  const handleChange = (field) => (e) => {
+    setFormData({ ...formData, [field]: e.target.value });
+    setErrors({ ...errors, [field]: '' });
   };
 
   return (
@@ -36,7 +47,8 @@ const NewCampusView = ({ handleSubmit }) => {
         <input
           type="text"
           value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          onChange={handleChange('name')}
+          required
         />
         {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
 
@@ -46,7 +58,8 @@ const NewCampusView = ({ handleSubmit }) => {
         <input
           type="text"
           value={formData.address}
-          onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+          onChange={handleChange('address')}
+          required
         />
         {errors.address && <p style={{ color: 'red' }}>{errors.address}</p>}
 
@@ -55,7 +68,7 @@ const NewCampusView = ({ handleSubmit }) => {
         <label>Description: </label>
         <textarea
           value={formData.description}
-          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          onChange={handleChange('description')}
         />
 
         <br />
@@ -64,7 +77,7 @@ const NewCampusView = ({ handleSubmit }) => {
         <input
           type="text"
           value={formData.imageUrl}
-          onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+          onChange={handleChange('imageUrl')}
         />
 
         <br /><br />
