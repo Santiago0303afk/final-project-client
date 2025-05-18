@@ -10,9 +10,9 @@ import {
   AllCampusesContainer,
   AllStudentsContainer,
   NewStudentContainer,
-  NewCampusContainer, // ✅ FIXED
   EditCampusContainer,
-  EditStudentContainer
+  EditStudentContainer,
+  NewCampusContainer
 } from './components/containers';
 
 
