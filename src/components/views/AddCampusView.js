@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const AddCampusView = (props) => {
+const AddCampusView = (props) => {
   const {
     name,
     address,
@@ -49,3 +49,5 @@ AddCampusView.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired
 };
+
+export default AddCampusView;
