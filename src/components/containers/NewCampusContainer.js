@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { addCampusThunk } from '../../store/thunks';
@@ -18,9 +18,7 @@ class NewCampusContainer extends Component {
   }
 
   handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   validate = () => {
@@ -56,9 +54,7 @@ class NewCampusContainer extends Component {
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to="/campuses" />;
-    }
+    if (this.state.redirect) return <Redirect to="/campuses" />;
 
     return (
       <AddCampusView
