@@ -24,7 +24,7 @@ const HomePageView = () => {
       </h1>
 
       <img
-        src="https://grps-cdn.fxbrt.com/downloads/_photogalleries_/603b14e8775b43508fa71c220c049f6b.jpg?c=f&d=0"
+        src="https://via.placeholder.com/900x400.png?text=Campus+Image"
         alt="Campus"
         style={{
           width: '80%',
