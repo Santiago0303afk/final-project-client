@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { addCampusThunk } from "../../store/thunks";
-import { AddCampusView } from "../views";
+import AddCampusView from "../views/AddCampusView";
 import Header from "./Header";
+
 
 class AddCampusContainer extends Component {
   constructor(props) {
