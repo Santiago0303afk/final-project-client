@@ -54,22 +54,13 @@ class NewCampusContainer extends Component {
   };
 
   render() {
-    if (this.state.redirect) return <Redirect to="/campuses" />;
-
-    return (
-      <AddCampusView
-        name={this.state.name}
-        address={this.state.address}
-        description={this.state.description}
-        imageUrl={this.state.imageUrl}
-        errors={this.state.errors}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-      />
-    );
-  }
+   render() {
+  return (
+    <div>
+      <h1>🧪 Test — New Campus Page is Rendering</h1>
+    </div>
+  );
 }
-
 const mapDispatch = (dispatch) => ({
   addCampus: (campus) => dispatch(addCampusThunk(campus)),
 });
