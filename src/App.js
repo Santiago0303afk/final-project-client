@@ -1,8 +1,6 @@
 import "./App.css";
-
-//Router
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-//Components
+
 import {
   HomePageContainer,
   CampusContainer,
@@ -14,11 +12,6 @@ import {
   EditStudentContainer,
   NewCampusContainer
 } from './components/containers';
-
-
-// if you create separate components for adding/editing 
-// a student or campus, make sure you add routes to those
-// components here
 
 const App = () => {
   return (
@@ -38,6 +31,6 @@ const App = () => {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
