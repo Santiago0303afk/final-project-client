@@ -1,9 +1,9 @@
 /*==================================================
 HomePageView.js
 
-The Views component is responsible for rendering web page with data provided by the corresponding Container component.
-It constructs a React component to display the home page.
-================================================== */
+The Views component is responsible for rendering the home page.
+==================================================*/
+
 import React from 'react';
 
 const HomePageView = () => {
@@ -26,11 +26,14 @@ const HomePageView = () => {
       <img
         src="https://via.placeholder.com/900x400.png?text=Campus+Image"
         alt="Campus"
+        referrerPolicy="no-referrer"
         style={{
           width: '80%',
           maxWidth: '900px',
           borderRadius: '12px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+          display: 'block',
+          margin: '0 auto'
         }}
       />
 
@@ -46,3 +49,4 @@ const HomePageView = () => {
 };
 
 export default HomePageView;
+
