@@ -10,10 +10,11 @@ import {
   AllCampusesContainer,
   AllStudentsContainer,
   NewStudentContainer,
-  AddCampusContainer,
+  NewCampusContainer, // ✅ FIXED
   EditCampusContainer,
   EditStudentContainer
 } from './components/containers';
+
 
 // if you create separate components for adding/editing 
 // a student or campus, make sure you add routes to those
