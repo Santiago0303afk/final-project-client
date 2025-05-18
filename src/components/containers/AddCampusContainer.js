@@ -13,7 +13,7 @@ const AddCampusContainer = () => {
     name: "",
     address: "",
     description: "",
-    imageUrl: "",
+    imageUrl: ""
   });
 
   const [errors, setErrors] = useState({});
@@ -21,7 +21,7 @@ const AddCampusContainer = () => {
   const handleChange = (event) => {
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
   };
 
@@ -42,9 +42,7 @@ const AddCampusContainer = () => {
     }
 
     await dispatch(addCampusThunk(formData));
-
-    // ✅ Use navigate instead of history
-    navigate("/campuses");
+    navigate("/campuses"); // Redirect on success
   };
 
   return (
