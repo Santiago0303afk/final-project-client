@@ -1,86 +1,66 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";  // import this
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addCampusThunk } from "../../store/thunks";
 import { AddCampusView } from "../views";
 import Header from "./Header";
 
-class AddCampusContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      address: "",
-      description: "",
-      imageUrl: "",
-      errors: {}
-    };
-  }
+const AddCampusContainer = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
+  const [formData, setFormData] = useState({
+    name: "",
+    address: "",
+    description: "",
+    imageUrl: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
     });
   };
 
-  validate = () => {
+  const validate = () => {
     const errors = {};
-    if (!this.state.name.trim()) errors.name = "Name is required.";
-    if (!this.state.address.trim()) errors.address = "Address is required.";
+    if (!formData.name.trim()) errors.name = "Name is required.";
+    if (!formData.address.trim()) errors.address = "Address is required.";
     return errors;
   };
 
-  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const errors = this.validate();
-    if (Object.keys(errors).length > 0) {
-      this.setState({ errors });
+
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
-    const newCampus = {
-      name: this.state.name,
-      address: this.state.address,
-      description: this.state.description,
-      imageUrl: this.state.imageUrl || undefined
-    };
+    await dispatch(addCampusThunk(formData));
 
-    const createdCampus = await this.props.addCampus(newCampus);
-    this.setState({
-      name: "",
-      address: "",
-      description: "",
-      imageUrl: "",
-      errors: {}
-    });
-
-    //  redirect using history now available through withRouter
-    this.props.history.push("/campuses");
+    // ✅ Use navigate instead of history
+    navigate("/campuses");
   };
 
-  render() {
-    return (
-      <div>
-        <Header />
-        <AddCampusView
-          name={this.state.name}
-          address={this.state.address}
-          description={this.state.description}
-          imageUrl={this.state.imageUrl}
-          errors={this.state.errors}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        />
-      </div>
-    );
-  }
-}
-
-const mapDispatch = (dispatch) => {
-  return {
-    addCampus: (campus) => dispatch(addCampusThunk(campus))
-  };
+  return (
+    <div>
+      <Header />
+      <AddCampusView
+        name={formData.name}
+        address={formData.address}
+        description={formData.description}
+        imageUrl={formData.imageUrl}
+        errors={errors}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
+    </div>
+  );
 };
 
-//  wrap withRouter to enable this.props.history
-export default withRouter(connect(null, mapDispatch)(AddCampusContainer));
+export default AddCampusContainer;
