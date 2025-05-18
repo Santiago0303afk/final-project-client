@@ -10,20 +10,20 @@ import { Link } from "react-router-dom";
 const AllCampusesView = (props) => {
   const { allCampuses } = props;
 
-  // If there are no campuses, show a message.
+  // If there are no campuses, show a message and the add button
   if (!allCampuses.length) {
     return (
       <div>
         <h1>All Campuses</h1>
         <p>There are no campuses.</p>
         <Link to="/add-campus">
-          <button>Add New Campus</button>
+          <button type="button">Add New Campus</button>
         </Link>
       </div>
     );
   }
 
-  // If there are campuses, display them.
+  // If there are campuses, display them
   return (
     <div>
       <h1>All Campuses</h1>
@@ -43,7 +43,7 @@ const AllCampusesView = (props) => {
 
       <br />
       <Link to="/add-campus">
-        <button>Add New Campus</button>
+        <button type="button">Add New Campus</button>
       </Link>
       <br /><br />
     </div>
