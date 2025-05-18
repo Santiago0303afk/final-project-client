@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";  // import this
 import { addCampusThunk } from "../../store/thunks";
 import { AddCampusView } from "../views";
 import Header from "./Header";
@@ -53,6 +54,7 @@ class AddCampusContainer extends Component {
       errors: {}
     });
 
+    //  redirect using history now available through withRouter
     this.props.history.push("/campuses");
   };
 
@@ -80,4 +82,5 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatch)(AddCampusContainer);
+//  wrap withRouter to enable this.props.history
+export default withRouter(connect(null, mapDispatch)(AddCampusContainer));
