@@ -1,21 +1,18 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { addCampusThunk } from '../../store/thunks';
 import AddCampusView from '../views/AddCampusView';
 
 class NewCampusContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      address: '',
-      description: '',
-      imageUrl: '',
-      redirect: false,
-      errors: {}
-    };
-  }
+  state = {
+    name: '',
+    address: '',
+    description: '',
+    imageUrl: '',
+    redirect: false,
+    errors: {}
+  };
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -30,8 +27,9 @@ class NewCampusContainer extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
+
     const errors = this.validate();
-    if (Object.keys(errors).length) {
+    if (Object.keys(errors).length > 0) {
       this.setState({ errors });
       return;
     }
@@ -49,7 +47,7 @@ class NewCampusContainer extends Component {
         this.setState({ redirect: true });
       }
     } catch (error) {
-      console.error('Add campus error:', error);
+      console.error('Failed to add campus:', error);
     }
   };
 
