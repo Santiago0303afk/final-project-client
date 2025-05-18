@@ -52,6 +52,7 @@ class NewCampusContainer extends Component {
   };
 
   render() {
+    console.log("Rendering NewCampusContainer");
     if (this.state.redirect) return <Redirect to="/campuses" />;
 
     return (
